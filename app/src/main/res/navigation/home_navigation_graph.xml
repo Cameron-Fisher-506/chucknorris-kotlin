@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/jokes_navigation"
+    app:startDestination="@id/jokeListFragment">
+
+    <fragment
+        android:id="@+id/jokeListFragment"
+        android:name="com.example.chucknorris.view.jokes.JokeListFragment"
+        android:label="Jokes" >
+        <action
+            android:id="@+id/action_jokeListFragment_to_jokeDetailsFragment"
+            app:destination="@id/jokeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jokeDetailsFragment"
+        android:name="com.example.chucknorris.view.jokes.JokeDetailsFragment"
+        android:label="Details" >
+        <action
+            android:id="@+id/action_jokeDetailsFragment_to_jokeListFragment"
+            app:destination="@id/jokeListFragment" />
+        <argument
+            android:name="joke"
+            app:argType="com.example.chucknorris.model.Joke" />
+    </fragment>
+</navigation>

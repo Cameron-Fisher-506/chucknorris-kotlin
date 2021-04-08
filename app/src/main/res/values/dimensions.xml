@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Spaces-->
+    <dimen name="normal_space">12dp</dimen>
+    <dimen name="small_space">6sp</dimen>
+
+    <!--Sizes-->
+    <dimen name="large">50dp</dimen>
+    <dimen name="medium">25dp</dimen>
+</resources>

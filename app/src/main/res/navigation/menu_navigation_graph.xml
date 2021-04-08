@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_navigation_graph"
+    app:startDestination="@id/menuListFragment">
+
+    <fragment
+        android:id="@+id/menuListFragment"
+        android:name="com.example.chucknorris.view.menu.MenuListFragment"
+        android:label="Menu"
+        tools:layout="@layout/menu_list_fragment" >
+        <action
+            android:id="@+id/action_menuListFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.example.chucknorris.view.menu.favourites.FavouritesFragment"
+        android:label="Favourites" >
+        <action
+            android:id="@+id/action_favouritesFragment_to_favouritesDetailsFragment"
+            app:destination="@id/favouritesDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesDetailsFragment"
+        android:name="com.example.chucknorris.view.jokes.JokeDetailsFragment"
+        android:label="Details" >
+        <argument
+            android:name="favouriteJoke"
+            app:argType="com.example.chucknorris.model.FavouriteJoke" />
+    </fragment>
+</navigation>
