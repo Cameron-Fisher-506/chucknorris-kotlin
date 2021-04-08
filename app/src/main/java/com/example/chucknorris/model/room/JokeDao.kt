@@ -10,7 +10,7 @@ import com.example.chucknorris.model.Joke
 @Dao
 interface JokeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveFavouriteJoke(joke: Joke)
+    suspend fun insert(joke: Joke)
 
     @Query("SELECT * FROM joke WHERE value = :value")
     suspend fun findByValue(value: String): Joke?
