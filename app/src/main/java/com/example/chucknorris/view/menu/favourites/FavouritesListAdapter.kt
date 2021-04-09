@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chucknorris.databinding.JokeItemBinding
 import com.example.chucknorris.model.FavouriteJoke
+import com.example.chucknorris.model.Joke
 
 class FavouritesListAdapter(private val favourites: ArrayList<FavouriteJoke>) :
     RecyclerView.Adapter<FavouritesListAdapter.ViewHolder>() {
@@ -28,10 +29,15 @@ class FavouritesListAdapter(private val favourites: ArrayList<FavouriteJoke>) :
         holder.binding.jokeTextView.text = favourites[position].value
 
         holder.binding.layoutContainer.setOnClickListener {
+            val joke = Joke().apply {
+                createdAt = favourites[position].createdAt
+                iconUrl = favourites[position].iconUrl
+                updatedAt = favourites[position].updatedAt
+                url = favourites[position].url
+                value = favourites[position].value
+            }
             val action =
-                FavouritesFragmentDirections.actionFavouritesFragmentToFavouritesDetailsFragment(
-                    favourites[position]
-                )
+                FavouritesFragmentDirections.actionFavouritesFragmentToFavouritesDetailsFragment(joke)
             Navigation.findNavController(it).navigate(action)
         }
     }

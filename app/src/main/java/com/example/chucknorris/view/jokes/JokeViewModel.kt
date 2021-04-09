@@ -16,16 +16,11 @@ class JokeViewModel(application: Application) : AndroidViewModel(application) {
 
     private var jokeRepository = JokeRepository(application)
 
-    fun setSearchTerm(query: String) {
+    fun getJokesBySearch(query: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val response = jokeRepository.getJokeBySearch(query)
-            withContext(Dispatchers.Main)
-            {
-                if (response.isSuccessful){
-                    jokesBySearch.value = response.body()
-                } else{
-                    jokesBySearch.value = null
-                }
+            withContext(Dispatchers.Main) {
+                jokesBySearch.value = if (response.isSuccessful) response.body() else null
             }
         }
     }

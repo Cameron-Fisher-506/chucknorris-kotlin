@@ -25,7 +25,7 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
         attachObservers()
         wireUI()
 
-        this.jokeViewModel.setSearchTerm("Animal")
+        this.jokeViewModel.getJokesBySearch("Animal")
     }
 
     private fun attachObservers()
@@ -81,7 +81,7 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
 
             refreshLayout.setOnRefreshListener {
                 displayProgressBar()
-                jokeViewModel.setSearchTerm("Dogs")
+                jokeViewModel.getJokesBySearch("Dogs")
                 refreshLayout.isRefreshing = false
             }
         }

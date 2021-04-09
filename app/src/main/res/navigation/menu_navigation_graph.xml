@@ -27,7 +27,7 @@
         android:name="com.example.chucknorris.view.jokes.JokeDetailsFragment"
         android:label="Details" >
         <argument
-            android:name="favouriteJoke"
-            app:argType="com.example.chucknorris.model.FavouriteJoke" />
+            android:name="joke"
+            app:argType="com.example.chucknorris.model.Joke" />
     </fragment>
 </navigation>
