@@ -15,8 +15,11 @@
         android:id="@+id/jokeDetailsFragment2"
         android:name="com.example.chucknorris.view.jokes.JokeDetailsFragment"
         android:label="JokeDetailsFragment" >
+        <action
+            android:id="@+id/action_jokeDetailsFragment2_to_searchListFragment"
+            app:destination="@id/searchListFragment" />
         <argument
             android:name="joke"
-            app:argType="com.example.chucknorris.model.Joke" />
+            app:argType="com.example.chucknorris.model.entities.Joke" />
     </fragment>
 </navigation>

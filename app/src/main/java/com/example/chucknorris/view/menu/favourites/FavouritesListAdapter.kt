@@ -6,8 +6,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chucknorris.databinding.JokeItemBinding
-import com.example.chucknorris.model.FavouriteJoke
-import com.example.chucknorris.model.Joke
+import com.example.chucknorris.model.entities.FavouriteJoke
+import com.example.chucknorris.model.entities.Joke
 
 class FavouritesListAdapter(private val favourites: ArrayList<FavouriteJoke>) :
     RecyclerView.Adapter<FavouritesListAdapter.ViewHolder>() {

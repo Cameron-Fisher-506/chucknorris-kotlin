@@ -1,9 +1,8 @@
-package com.example.chucknorris.repository
+package com.example.chucknorris.model.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.chucknorris.model.FavouriteJoke
-import com.example.chucknorris.model.Joke
+import com.example.chucknorris.model.entities.FavouriteJoke
 import com.example.chucknorris.model.room.JokeDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -5,15 +5,14 @@ import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.ArrayAdapter
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.SearchListFragmentBinding
-import com.example.chucknorris.model.Jokes
-import com.example.chucknorris.view.jokes.JokeListAdapter
+import com.example.chucknorris.enum.Status
+import com.example.chucknorris.model.entities.Jokes
+import com.example.chucknorris.utils.Resource
 import kotlinx.android.synthetic.main.search_list_fragment.*
 
 class SearchListFragment : Fragment(R.layout.search_list_fragment) {
@@ -32,13 +31,16 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
     }
 
     private fun attachObservers() {
-        val jokesBySearchObserver = Observer<Jokes> {
-            if (it != null) {
-                hideLoading()
-                this.searchListAdapter.updateJokesList(it)
-            } else {
-                //display error message
+        val jokesBySearchObserver = Observer<Resource<Jokes>> {
+            when (it.status){
+                Status.SUCCESS -> {
+                    hideLoading()
+                    it.data?.let { data -> this.searchListAdapter.updateJokesList(data) }
+                }
+                //Status.ERROR -> //display error
+                //Status.LOADING -> //display loading
             }
+
         }
         this.searchViewModel.jokesBySearch.observe(this, jokesBySearchObserver)
     }

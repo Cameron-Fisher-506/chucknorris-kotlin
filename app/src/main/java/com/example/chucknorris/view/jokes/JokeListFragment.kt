@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.JokeListFragmentBinding
-import com.example.chucknorris.model.Jokes
+import com.example.chucknorris.enum.Status
+import com.example.chucknorris.model.entities.Jokes
+import com.example.chucknorris.utils.Resource
 
 class JokeListFragment: Fragment(R.layout.joke_list_fragment)
 {
@@ -22,20 +24,21 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
 
         this.jokeViewModel = ViewModelProviders.of(this).get(JokeViewModel::class.java)
 
+        this.jokeViewModel.getJokesBySearch("Animal")
         attachObservers()
         wireUI()
-
-        this.jokeViewModel.getJokesBySearch("Animal")
     }
 
     private fun attachObservers()
     {
-        val jokesBySearchObserver = Observer<Jokes> {
-            if(it != null){
-                displayJokesRecyclerView()
-                this.jokeListAdapter.updateJokesList(it)
-            }else{
-                displayErrorMessage()
+        val jokesBySearchObserver = Observer<Resource<Jokes>> {
+            when (it.status){
+                Status.SUCCESS -> {
+                    displayJokesRecyclerView()
+                    it.data?.let { data -> this.jokeListAdapter.updateJokesList(data) }
+                }
+                Status.ERROR -> displayErrorMessage()
+                Status.LOADING -> displayProgressBar()
             }
         }
         this.jokeViewModel.jokesBySearch.observe(this, jokesBySearchObserver)
