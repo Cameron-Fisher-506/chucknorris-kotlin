@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.example.chucknorris.model.entities.Joke
 
 @Dao
-interface JokeDao {
+interface JokeDao: BaseDao<Joke> {
 
     @Query("SELECT * FROM joke WHERE value = :value")
     suspend fun findByValue(value: String): Joke?
