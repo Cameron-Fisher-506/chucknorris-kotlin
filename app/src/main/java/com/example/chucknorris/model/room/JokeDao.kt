@@ -9,11 +9,6 @@ import com.example.chucknorris.model.entities.Joke
 
 @Dao
 interface JokeDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(joke: Joke)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertAll(jokes: List<Joke>)
 
     @Query("SELECT * FROM joke WHERE value = :value")
     suspend fun findByValue(value: String): Joke?
