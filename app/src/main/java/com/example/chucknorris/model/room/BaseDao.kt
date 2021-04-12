@@ -6,21 +6,20 @@ import androidx.room.*
 interface BaseDao<T> {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(entity: T)
+    suspend fun insert(entity: T)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(entities: List<T>)
+    suspend fun insert(entities: List<T>)
 
     @Update
-    fun update(entity: T)
+    suspend fun update(entity: T)
 
     @Update
-    fun update(entities: List<T>)
+    suspend fun update(entities: List<T>)
 
     @Delete
-    fun delete(entity: T)
+    suspend fun delete(entity: T)
 
     @Delete
-    fun delete(entities: List<T>)
-
+    suspend fun delete(entities: List<T>)
 }

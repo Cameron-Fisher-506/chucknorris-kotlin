@@ -10,7 +10,7 @@ data class FavouriteJoke(
                     var updatedAt: String = "",
                     var url: String = "",
                     var value: String = ""
-): Serializable {
+): BaseEntity(), Serializable {
     @PrimaryKey(autoGenerate = true)
-    var id = 0
+    override var id: Int = 0
 }

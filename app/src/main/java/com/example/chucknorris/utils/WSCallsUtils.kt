@@ -16,7 +16,7 @@ object WSCallsUtils {
                 emit(Resource.success(response.data))
                 //cache
                 if (response.data is Jokes) {
-                    dao.insertAll(response.data.jokes)
+                    dao.insert(response.data.jokes)
                 }
             } else {
                 //emit(Resource.error(response.message ?: "Service failed: Please contact developer!"))

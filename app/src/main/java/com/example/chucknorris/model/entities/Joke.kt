@@ -15,9 +15,9 @@ data class Joke(@SerializedName("created_at")
            var updatedAt: String = "",
            var url: String = "",
            var value: String = ""
-): Serializable
+): BaseEntity(), Serializable
 {
     @PrimaryKey(autoGenerate = true)
     @SerializedName("")
-    var id = 0
+    override var id: Int = 0
 }
