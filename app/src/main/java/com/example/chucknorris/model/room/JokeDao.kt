@@ -2,10 +2,8 @@ package com.example.chucknorris.model.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.chucknorris.model.entities.Joke
+import com.example.chucknorris.model.models.Joke
 
 @Dao
 interface JokeDao: BaseDao<Joke> {

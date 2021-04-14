@@ -1,4 +1,4 @@
-package com.example.chucknorris.model.entities
+package com.example.chucknorris.model.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
@@ -10,7 +10,7 @@ data class FavouriteJoke(
                     var updatedAt: String = "",
                     var url: String = "",
                     var value: String = ""
-): BaseEntity(), Serializable {
+): BaseModel(), Serializable {
     @PrimaryKey(autoGenerate = true)
     override var id: Int = 0
 }

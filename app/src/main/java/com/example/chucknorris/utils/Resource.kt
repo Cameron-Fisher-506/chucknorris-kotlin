@@ -1,7 +1,6 @@
 package com.example.chucknorris.utils
 
 import com.example.chucknorris.enum.Status
-import com.example.chucknorris.model.entities.Jokes
 
 class Resource<T>(val status: Status, val data: T?, val message: String?) {
     companion object {

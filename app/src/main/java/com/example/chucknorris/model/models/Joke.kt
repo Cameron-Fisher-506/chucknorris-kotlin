@@ -1,8 +1,7 @@
-package com.example.chucknorris.model.entities
+package com.example.chucknorris.model.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -15,7 +14,7 @@ data class Joke(@SerializedName("created_at")
            var updatedAt: String = "",
            var url: String = "",
            var value: String = ""
-): BaseEntity(), Serializable
+): BaseModel(), Serializable
 {
     @PrimaryKey(autoGenerate = true)
     @SerializedName("")

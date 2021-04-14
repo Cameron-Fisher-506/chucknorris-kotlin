@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.JokeDetailsFragmentBinding
-import com.example.chucknorris.model.entities.FavouriteJoke
+import com.example.chucknorris.model.models.FavouriteJoke
 import com.example.chucknorris.utils.GeneralUtils
 import com.example.chucknorris.view.menu.favourites.FavouritesViewModel
 import kotlinx.coroutines.CoroutineScope

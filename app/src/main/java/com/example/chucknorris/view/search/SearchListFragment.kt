@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.SearchListFragmentBinding
 import com.example.chucknorris.enum.Status
-import com.example.chucknorris.model.entities.Jokes
+import com.example.chucknorris.model.models.Jokes
 import com.example.chucknorris.utils.Resource
 import kotlinx.android.synthetic.main.search_list_fragment.*
 
@@ -26,6 +26,7 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
 
         this.searchViewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
 
+        this.searchViewModel.getJokesBySearch("Animal")
         attachObservers()
         wireUI()
     }
@@ -37,8 +38,8 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
                     hideLoading()
                     it.data?.let { data -> this.searchListAdapter.updateJokesList(data) }
                 }
-                //Status.ERROR -> //display error
-                //Status.LOADING -> //display loading
+                Status.ERROR -> showLoadingError()
+                Status.LOADING -> showLoading()
             }
 
         }
@@ -63,6 +64,7 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
         with(this.binding) {
             loadingProgressBar.visibility = View.VISIBLE
             searchRecyclerView.visibility = View.GONE
+            errorTextView.visibility = View.GONE
         }
     }
 
@@ -70,6 +72,15 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
         with(this.binding){
             loadingProgressBar.visibility = View.GONE
             searchRecyclerView.visibility = View.VISIBLE
+            errorTextView.visibility = View.GONE
+        }
+    }
+
+    private fun showLoadingError(){
+        with(this.binding){
+            loadingProgressBar.visibility = View.GONE
+            searchRecyclerView.visibility = View.GONE
+            errorTextView.visibility = View.VISIBLE
         }
     }
 }

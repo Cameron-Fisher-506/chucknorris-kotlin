@@ -1,8 +1,5 @@
 package com.example.chucknorris.model.service
 
-import com.example.chucknorris.model.entities.Joke
-import com.example.chucknorris.model.entities.Jokes
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

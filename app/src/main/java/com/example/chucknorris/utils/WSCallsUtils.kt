@@ -1,9 +1,8 @@
 package com.example.chucknorris.utils
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.example.chucknorris.enum.Status
-import com.example.chucknorris.model.entities.Jokes
+import com.example.chucknorris.model.models.Jokes
 import com.example.chucknorris.model.room.JokeDao
 import kotlinx.coroutines.Dispatchers
 
@@ -20,8 +19,8 @@ object WSCallsUtils {
                 }
             } else {
                 //emit(Resource.error(response.message ?: "Service failed: Please contact developer!"))
-                val data = dao.readAllJokes()
-                data.value?.let { emit(Resource.success(it)) }
+                //val data = dao.readAllJokes()
+                //data.value?.let { emit(Resource.success(it)) }
             }
         }
 }

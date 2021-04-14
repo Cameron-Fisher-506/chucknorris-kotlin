@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.JokeListFragmentBinding
 import com.example.chucknorris.enum.Status
-import com.example.chucknorris.model.entities.Jokes
+import com.example.chucknorris.model.models.Jokes
 import com.example.chucknorris.utils.Resource
 
 class JokeListFragment: Fragment(R.layout.joke_list_fragment)

@@ -1,16 +1,9 @@
 package com.example.chucknorris.model.repository
 
 import android.app.Application
-import androidx.lifecycle.liveData
-import com.example.chucknorris.enum.Status
-import com.example.chucknorris.model.entities.Joke
-import com.example.chucknorris.model.entities.Jokes
-import com.example.chucknorris.model.room.JokeDao
 import com.example.chucknorris.model.room.JokeDatabase
 import com.example.chucknorris.model.service.ChuckNorrisService
-import com.example.chucknorris.utils.Resource
 import com.example.chucknorris.utils.WSCallsUtils
-import kotlinx.coroutines.*
 
 class JokeRepository(application: Application) {
     private val chuckNorrisService = ChuckNorrisService()

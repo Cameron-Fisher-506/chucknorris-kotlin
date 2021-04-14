@@ -1,7 +1,7 @@
 package com.example.chucknorris.model.service
 
-import com.example.chucknorris.model.entities.Joke
-import com.example.chucknorris.model.entities.Jokes
+import com.example.chucknorris.model.models.Joke
+import com.example.chucknorris.model.models.Jokes
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

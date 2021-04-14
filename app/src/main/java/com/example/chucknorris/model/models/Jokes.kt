@@ -1,6 +1,5 @@
-package com.example.chucknorris.model.entities
+package com.example.chucknorris.model.models
 
-import com.example.chucknorris.model.entities.Joke
 import com.google.gson.annotations.SerializedName
 
 class Jokes(var total: Int = 0,

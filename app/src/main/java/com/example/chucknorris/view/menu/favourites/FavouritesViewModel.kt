@@ -2,7 +2,7 @@ package com.example.chucknorris.view.menu.favourites
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.chucknorris.model.entities.FavouriteJoke
+import com.example.chucknorris.model.models.FavouriteJoke
 import com.example.chucknorris.model.repository.FavouriteJokeRepository
 
 class FavouritesViewModel(application: Application) : AndroidViewModel(application) {

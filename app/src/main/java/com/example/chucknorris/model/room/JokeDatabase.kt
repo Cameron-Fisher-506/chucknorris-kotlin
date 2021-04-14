@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.chucknorris.model.entities.FavouriteJoke
-import com.example.chucknorris.model.entities.Joke
+import com.example.chucknorris.model.models.FavouriteJoke
+import com.example.chucknorris.model.models.Joke
 
 @Database(entities = [Joke::class, FavouriteJoke::class], version = 2, exportSchema = false)
 abstract class JokeDatabase: RoomDatabase() {

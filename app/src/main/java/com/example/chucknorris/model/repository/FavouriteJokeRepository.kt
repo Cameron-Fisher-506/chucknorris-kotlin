@@ -2,7 +2,7 @@ package com.example.chucknorris.model.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.example.chucknorris.model.entities.FavouriteJoke
+import com.example.chucknorris.model.models.FavouriteJoke
 import com.example.chucknorris.model.room.JokeDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

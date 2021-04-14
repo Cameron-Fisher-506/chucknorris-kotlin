@@ -7,8 +7,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chucknorris.databinding.JokeItemBinding
-import com.example.chucknorris.model.entities.Joke
-import com.example.chucknorris.model.entities.Jokes
+import com.example.chucknorris.model.models.Joke
+import com.example.chucknorris.model.models.Jokes
 
 class JokeListAdapter(private val jokeList: ArrayList<Joke>): RecyclerView.Adapter<JokeListAdapter.JokeViewHolder>() {
 

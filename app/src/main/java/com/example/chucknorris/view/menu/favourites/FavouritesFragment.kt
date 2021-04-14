@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.FavouritesFragmentBinding
-import com.example.chucknorris.model.entities.FavouriteJoke
+import com.example.chucknorris.model.models.FavouriteJoke
 import kotlinx.android.synthetic.main.joke_list_fragment.*
 
 
