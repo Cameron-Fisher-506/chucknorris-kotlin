@@ -1,6 +1,9 @@
 package com.example.chucknorris.model.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
+import androidx.sqlite.db.SupportSQLiteQuery
+import com.example.chucknorris.model.models.Joke
 
 @Dao
 interface BaseDao<T> {
@@ -22,4 +25,7 @@ interface BaseDao<T> {
 
     @Delete
     suspend fun delete(entities: List<T>)
+
+    @RawQuery
+    suspend fun specialQuery(query: SupportSQLiteQuery): T?
 }

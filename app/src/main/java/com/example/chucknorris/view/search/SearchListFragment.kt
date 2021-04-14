@@ -12,6 +12,7 @@ import com.example.chucknorris.R
 import com.example.chucknorris.databinding.SearchListFragmentBinding
 import com.example.chucknorris.enum.Status
 import com.example.chucknorris.model.models.Jokes
+import com.example.chucknorris.utils.GeneralUtils
 import com.example.chucknorris.utils.Resource
 import kotlinx.android.synthetic.main.search_list_fragment.*
 
@@ -33,7 +34,7 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
 
     private fun attachObservers() {
         val jokesBySearchObserver = Observer<Resource<Jokes>> {
-            when (it.status){
+            when (it.status) {
                 Status.SUCCESS -> {
                     hideLoading()
                     it.data?.let { data -> this.searchListAdapter.updateJokesList(data) }
@@ -55,6 +56,15 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
             false
         }
 
+        this.binding.searchImageButton.setOnClickListener {
+            if (searchEditText.text.toString().isNotEmpty()) {
+                showLoading()
+                searchViewModel.getJokesBySearch(searchEditText.text.toString())
+            } else {
+                context?.let { GeneralUtils.makeToast(it, "Please enter a search term.") }
+            }
+        }
+
         this.searchListAdapter = SearchListAdapter(arrayListOf())
         this.binding.searchRecyclerView.layoutManager = GridLayoutManager(context, 1)
         this.binding.searchRecyclerView.adapter = this.searchListAdapter
@@ -69,15 +79,15 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
     }
 
     private fun hideLoading() {
-        with(this.binding){
+        with(this.binding) {
             loadingProgressBar.visibility = View.GONE
             searchRecyclerView.visibility = View.VISIBLE
             errorTextView.visibility = View.GONE
         }
     }
 
-    private fun showLoadingError(){
-        with(this.binding){
+    private fun showLoadingError() {
+        with(this.binding) {
             loadingProgressBar.visibility = View.GONE
             searchRecyclerView.visibility = View.GONE
             errorTextView.visibility = View.VISIBLE

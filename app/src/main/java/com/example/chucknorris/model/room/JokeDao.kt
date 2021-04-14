@@ -11,6 +11,5 @@ interface JokeDao: BaseDao<Joke> {
     @Query("SELECT * FROM joke WHERE value = :value")
     suspend fun findByValue(value: String): Joke?
 
-    @Query("SELECT * FROM joke")
-    fun readAllJokes(): LiveData<List<Joke>>
+
 }

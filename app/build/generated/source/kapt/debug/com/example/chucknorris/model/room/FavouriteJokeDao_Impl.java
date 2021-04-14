@@ -9,6 +9,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
+import androidx.sqlite.db.SupportSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteStatement;
 import com.example.chucknorris.model.models.FavouriteJoke;
 import java.lang.Exception;
@@ -319,5 +320,75 @@ public final class FavouriteJokeDao_Impl implements FavouriteJokeDao {
         _statement.release();
       }
     });
+  }
+
+  @Override
+  public Object specialQuery(final SupportSQLiteQuery query,
+      final Continuation<? super FavouriteJoke> p1) {
+    final SupportSQLiteQuery _internalQuery = query;
+    return CoroutinesRoom.execute(__db, false, new Callable<FavouriteJoke>() {
+      @Override
+      public FavouriteJoke call() throws Exception {
+        final Cursor _cursor = DBUtil.query(__db, _internalQuery, false, null);
+        try {
+          final FavouriteJoke _result;
+          if(_cursor.moveToFirst()) {
+            _result = __entityCursorConverter_comExampleChucknorrisModelModelsFavouriteJoke(_cursor);
+          } else {
+            _result = null;
+          }
+          return _result;
+        } finally {
+          _cursor.close();
+        }
+      }
+    }, p1);
+  }
+
+  private FavouriteJoke __entityCursorConverter_comExampleChucknorrisModelModelsFavouriteJoke(Cursor cursor) {
+    final FavouriteJoke _entity;
+    final int _cursorIndexOfId = cursor.getColumnIndex("id");
+    final int _cursorIndexOfCreatedAt = cursor.getColumnIndex("createdAt");
+    final int _cursorIndexOfIconUrl = cursor.getColumnIndex("iconUrl");
+    final int _cursorIndexOfUpdatedAt = cursor.getColumnIndex("updatedAt");
+    final int _cursorIndexOfUrl = cursor.getColumnIndex("url");
+    final int _cursorIndexOfValue = cursor.getColumnIndex("value");
+    final String _tmpCreatedAt;
+    if (_cursorIndexOfCreatedAt == -1) {
+      _tmpCreatedAt = null;
+    } else {
+      _tmpCreatedAt = cursor.getString(_cursorIndexOfCreatedAt);
+    }
+    final String _tmpIconUrl;
+    if (_cursorIndexOfIconUrl == -1) {
+      _tmpIconUrl = null;
+    } else {
+      _tmpIconUrl = cursor.getString(_cursorIndexOfIconUrl);
+    }
+    final String _tmpUpdatedAt;
+    if (_cursorIndexOfUpdatedAt == -1) {
+      _tmpUpdatedAt = null;
+    } else {
+      _tmpUpdatedAt = cursor.getString(_cursorIndexOfUpdatedAt);
+    }
+    final String _tmpUrl;
+    if (_cursorIndexOfUrl == -1) {
+      _tmpUrl = null;
+    } else {
+      _tmpUrl = cursor.getString(_cursorIndexOfUrl);
+    }
+    final String _tmpValue;
+    if (_cursorIndexOfValue == -1) {
+      _tmpValue = null;
+    } else {
+      _tmpValue = cursor.getString(_cursorIndexOfValue);
+    }
+    _entity = new FavouriteJoke(_tmpCreatedAt,_tmpIconUrl,_tmpUpdatedAt,_tmpUrl,_tmpValue);
+    if (_cursorIndexOfId != -1) {
+      final int _tmpId;
+      _tmpId = cursor.getInt(_cursorIndexOfId);
+      _entity.setId(_tmpId);
+    }
+    return _entity;
   }
 }
