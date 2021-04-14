@@ -3,11 +3,11 @@ package com.example.chucknorris.utils
 import androidx.lifecycle.liveData
 import com.example.chucknorris.enum.Status
 import com.example.chucknorris.model.models.Jokes
-import com.example.chucknorris.model.room.JokeDao
+import com.example.chucknorris.model.room.IJokeDao
 import kotlinx.coroutines.Dispatchers
 
 object WSCallsUtils {
-    fun <T> get(dao: JokeDao, wsCall: suspend () -> Resource<T>) =
+    fun <T> get(daoJokeDao: IJokeDao, wsCall: suspend () -> Resource<T>) =
         liveData<Resource<T>>(Dispatchers.IO) {
             emit(Resource.loading())
             val response = wsCall.invoke()
@@ -15,7 +15,7 @@ object WSCallsUtils {
                 emit(Resource.success(response.data))
                 //cache
                 if (response.data is Jokes) {
-                    dao.insert(response.data.jokes)
+                    daoJokeDao.insert(response.data.jokes)
                 }
             } else {
                 //emit(Resource.error(response.message ?: "Service failed: Please contact developer!"))

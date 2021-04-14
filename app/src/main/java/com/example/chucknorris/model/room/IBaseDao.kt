@@ -6,7 +6,7 @@ import androidx.sqlite.db.SupportSQLiteQuery
 import com.example.chucknorris.model.models.Joke
 
 @Dao
-interface BaseDao<T> {
+interface IBaseDao<T> {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(entity: T)

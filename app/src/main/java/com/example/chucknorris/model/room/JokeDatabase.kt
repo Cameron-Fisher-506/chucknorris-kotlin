@@ -10,8 +10,8 @@ import com.example.chucknorris.model.models.Joke
 @Database(entities = [Joke::class, FavouriteJoke::class], version = 2, exportSchema = false)
 abstract class JokeDatabase: RoomDatabase() {
 
-    abstract fun jokeDao(): JokeDao
-    abstract fun favouriteJokeDao(): FavouriteJokeDao
+    abstract fun jokeDao(): IJokeDao
+    abstract fun favouriteJokeDao(): IFavouriteJokeDao
 
     companion object{
         @Volatile

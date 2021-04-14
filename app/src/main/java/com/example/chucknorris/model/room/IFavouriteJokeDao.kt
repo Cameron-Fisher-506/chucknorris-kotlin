@@ -6,7 +6,7 @@ import androidx.room.Query
 import com.example.chucknorris.model.models.FavouriteJoke
 
 @Dao
-interface FavouriteJokeDao: BaseDao<FavouriteJoke> {
+interface IFavouriteJokeDao: IBaseDao<FavouriteJoke> {
 
     @Query("SELECT * FROM favouritejoke WHERE value = :value")
     suspend fun findByValue(value: String): FavouriteJoke?
