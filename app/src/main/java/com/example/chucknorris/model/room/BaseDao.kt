@@ -27,5 +27,5 @@ interface BaseDao<T> {
     suspend fun delete(entities: List<T>)
 
     @RawQuery
-    suspend fun specialQuery(query: SupportSQLiteQuery): T?
+    suspend fun specialQuery(query: SupportSQLiteQuery): List<T>?
 }
