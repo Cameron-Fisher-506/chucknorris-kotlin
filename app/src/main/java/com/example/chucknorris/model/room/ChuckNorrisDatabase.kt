@@ -8,22 +8,22 @@ import com.example.chucknorris.model.models.FavouriteJoke
 import com.example.chucknorris.model.models.Joke
 
 @Database(entities = [Joke::class, FavouriteJoke::class], version = 2, exportSchema = false)
-abstract class JokeDatabase: RoomDatabase() {
+abstract class ChuckNorrisDatabase: RoomDatabase() {
 
     abstract fun jokeDao(): IJokeDao
     abstract fun favouriteJokeDao(): IFavouriteJokeDao
 
     companion object{
         @Volatile
-        private var INSTANCE: JokeDatabase? = null
+        private var INSTANCE: ChuckNorrisDatabase? = null
 
-        fun getDatabase(context: Context): JokeDatabase
+        fun getDatabase(context: Context): ChuckNorrisDatabase
         {
             val tempInstance = INSTANCE
             tempInstance?.let { return tempInstance } ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    JokeDatabase::class.java,
+                    ChuckNorrisDatabase::class.java,
                     "chucknorris"
                 ).build()
                 INSTANCE = instance
