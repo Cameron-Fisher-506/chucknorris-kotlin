@@ -20,6 +20,6 @@
             app:destination="@id/searchListFragment" />
         <argument
             android:name="joke"
-            app:argType="com.example.chucknorris.model.entities.Joke" />
+            app:argType="com.example.chucknorris.model.models.Joke" />
     </fragment>
 </navigation>
