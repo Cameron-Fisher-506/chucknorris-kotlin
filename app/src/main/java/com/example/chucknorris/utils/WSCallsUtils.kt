@@ -18,9 +18,7 @@ object WSCallsUtils {
                     daoJokeDao.insert(response.data.jokes)
                 }
             } else {
-                //emit(Resource.error(response.message ?: "Service failed: Please contact developer!"))
-                //val data = dao.readAllJokes()
-                //data.value?.let { emit(Resource.success(it)) }
+                emit(Resource.error(response.message ?: "Service failed: Please contact developer!"))
             }
         }
 }
