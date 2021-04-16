@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chucknorris.databinding.JokeItemBinding
 import com.example.chucknorris.model.models.Joke
-import com.example.chucknorris.model.models.Jokes
+import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 
 class JokeListAdapter(private val jokeList: ArrayList<Joke>): RecyclerView.Adapter<JokeListAdapter.JokeViewHolder>() {
 
@@ -37,10 +37,10 @@ class JokeListAdapter(private val jokeList: ArrayList<Joke>): RecyclerView.Adapt
 
     override fun getItemCount() = jokeList.size
 
-    fun updateJokesList(jokes: Jokes)
+    fun updateJokesList(chuckNorrisWithJokes: ChuckNorrisWithJokes)
     {
         this.jokeList.clear()
-        this.jokeList.addAll(jokes.jokes)
+        this.jokeList.addAll(chuckNorrisWithJokes.jokes)
         notifyDataSetChanged()
     }
 }
