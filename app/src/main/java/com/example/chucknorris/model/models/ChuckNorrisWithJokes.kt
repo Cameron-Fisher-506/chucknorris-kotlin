@@ -5,15 +5,12 @@ import androidx.room.Entity
 import androidx.room.Relation
 import com.google.gson.annotations.SerializedName
 
-@Entity
 data class ChuckNorrisWithJokes(
-    @Embedded val chuckNorris: ChuckNorris,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "id"
-    )
+    @Embedded
+    val chuckNorris: ChuckNorris,
 
-    var total: Int = 0,
+    @Relation(parentColumn = "id", entityColumn = "chuckNorrisId")
     @SerializedName("result")
-    var jokes: List<Joke> = arrayListOf()
+    var jokes: List<Joke> = arrayListOf()/*,
+    var total: Int = 0*/
 )

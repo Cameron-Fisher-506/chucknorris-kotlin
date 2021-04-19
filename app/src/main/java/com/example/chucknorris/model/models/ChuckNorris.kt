@@ -6,6 +6,7 @@ import java.io.Serializable
 
 @Entity
 data class ChuckNorris(
-    @PrimaryKey(autoGenerate = true)
-    override var id: Int = 0
+    @PrimaryKey(autoGenerate = false)
+    override var id: Int = 1,
+    val name: String = ""
 ): BaseModel(), Serializable

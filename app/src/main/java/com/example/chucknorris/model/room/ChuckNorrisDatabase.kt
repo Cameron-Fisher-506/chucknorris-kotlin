@@ -4,15 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.chucknorris.model.models.ChuckNorris
+import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 import com.example.chucknorris.model.models.FavouriteJoke
 import com.example.chucknorris.model.models.Joke
 
-@Database(entities = [Joke::class, FavouriteJoke::class], version = 2, exportSchema = false)
+@Database(entities = [Joke::class, FavouriteJoke::class, ChuckNorris::class], version = 4, exportSchema = false)
 abstract class ChuckNorrisDatabase : RoomDatabase() {
 
     abstract fun jokeDao(): IJokeDao
     abstract fun favouriteJokeDao(): IFavouriteJokeDao
-    abstract fun chuckNorrisWithJokesDao(): IChuckNorrisWithJokesDao
     abstract fun chuckNorrisDao(): IChuckNorrisDao
 
     companion object {

@@ -6,14 +6,17 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 @Entity
-data class Joke(@SerializedName("created_at")
-           var createdAt: String = "",
-           @SerializedName("icon_url")
-           var iconUrl: String = "",
-           @SerializedName("updated_at")
-           var updatedAt: String = "",
-           var url: String = "",
-           var value: String = ""
+data class Joke(
+    @SerializedName("created_at")
+    var createdAt: String = "",
+    @SerializedName("icon_url")
+    var iconUrl: String = "",
+    @SerializedName("updated_at")
+    var updatedAt: String = "",
+    var url: String = "",
+    var value: String = "",
+    var chuckNorrisId: Int = 1
+
 ): BaseModel(), Serializable
 {
     @PrimaryKey(autoGenerate = true)
