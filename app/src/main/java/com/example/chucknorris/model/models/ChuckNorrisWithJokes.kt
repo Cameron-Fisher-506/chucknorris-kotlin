@@ -11,6 +11,7 @@ data class ChuckNorrisWithJokes(
 
     @Relation(parentColumn = "id", entityColumn = "chuckNorrisId")
     @SerializedName("result")
-    var jokes: List<Joke> = arrayListOf()/*,
-    var total: Int = 0*/
+    var jokes: List<Joke>
+
+    //var total: Int = 0
 )

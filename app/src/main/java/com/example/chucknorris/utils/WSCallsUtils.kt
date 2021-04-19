@@ -6,35 +6,32 @@ import com.example.chucknorris.enum.Status
 import com.example.chucknorris.model.models.ChuckNorris
 import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 import com.example.chucknorris.model.models.Joke
-import com.example.chucknorris.model.room.ChuckNorrisDatabase
-import com.example.chucknorris.model.room.IBaseDao
+import com.example.chucknorris.model.room.*
 import kotlinx.coroutines.Dispatchers
 
 object WSCallsUtils {
-    inline fun <reified T> get(baseDao: IBaseDao<T>, crossinline wsCall: suspend () -> Resource<T>) =
+    inline fun <reified T, reified A> getByQuery(baseDao: IBaseDao<A>, crossinline wsCall: suspend () -> Resource<T>) =
         liveData<Resource<T>>(Dispatchers.IO) {
             emit(Resource.loading())
 
-            /*val response = wsCall.invoke()
+            val response = wsCall.invoke()
             if (response.status == Status.SUCCESS && response.data != null) {
                 emit(Resource.success(response.data))
                 //cache
                 if (response.data is ChuckNorrisWithJokes) {
-                    baseDao.insert(response.data.jokes as T)
+                    baseDao.insert(response.data.jokes as List<A>)
                 } else {
-                    baseDao.insert(response.data)
+                    baseDao.insert(response.data as A)
                 }
             } else {
-                val result = baseDao.specialQuery(SimpleSQLiteQuery("SELECT * FROM ${ChuckNorris::class.java.simpleName}"))
+                val result = baseDao.specialQuery(SimpleSQLiteQuery("SELECT * FROM ${A::class.java.simpleName} WHERE chuckNorrisId = 1"))
                 if (result != null) {
-                    val chuckNorrisWithJokes = ChuckNorrisWithJokes().apply {
-                        jokes = result as List<Joke>
-                    }
-                    emit(Resource.success(jokes as T))
+                    val chuckNorrisWithJokes = ChuckNorrisWithJokes(ChuckNorris(), result as List<Joke>)
+                    emit(Resource.success(chuckNorrisWithJokes as T))
                 } else {
                     // No data to display
                     emit(Resource.error("No Connection."))
                 }
-            }*/
+            }
         }
 }
