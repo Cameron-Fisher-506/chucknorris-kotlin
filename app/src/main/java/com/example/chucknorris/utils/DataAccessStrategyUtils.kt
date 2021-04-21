@@ -9,7 +9,7 @@ import com.example.chucknorris.model.models.Joke
 import com.example.chucknorris.model.room.*
 import kotlinx.coroutines.Dispatchers
 
-object WSCallsUtils {
+object DataAccessStrategyUtils {
     inline fun <reified T, reified A> getByQuery(baseDao: IBaseDao<A>, crossinline wsCall: suspend () -> Resource<T>) =
         liveData<Resource<T>>(Dispatchers.IO) {
             emit(Resource.loading())
