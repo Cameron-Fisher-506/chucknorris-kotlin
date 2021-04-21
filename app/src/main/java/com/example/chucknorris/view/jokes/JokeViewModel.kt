@@ -10,8 +10,11 @@ import com.example.chucknorris.utils.Resource
 class JokeViewModel(application: Application) : AndroidViewModel(application) {
     lateinit var chuckNorrisWithJokesBySearch: LiveData<Resource<ChuckNorrisWithJokes>>
 
-    private val chuckNorrisRepository = ChuckNorrisRepository(application)
     private var jokeRepository = JokeRepository(application)
+
+    init {
+        ChuckNorrisRepository(application)
+    }
 
     fun getJokesBySearch(query: String) {
         chuckNorrisWithJokesBySearch = jokeRepository.getJokeBySearch(query)
