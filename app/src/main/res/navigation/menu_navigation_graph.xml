@@ -9,7 +9,7 @@
         android:id="@+id/menuListFragment"
         android:name="com.example.chucknorris.view.menu.MenuListFragment"
         android:label="Menu"
-        tools:layout="@layout/menu_list_fragment" >
+        tools:layout="@layout/menu_list_fragment">
         <action
             android:id="@+id/action_menuListFragment_to_favouritesFragment"
             app:destination="@id/favouritesFragment" />
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.example.chucknorris.view.menu.favourites.FavouritesFragment"
-        android:label="Favourites" >
+        android:label="Favourites">
         <action
             android:id="@+id/action_favouritesFragment_to_favouritesDetailsFragment"
             app:destination="@id/favouritesDetailsFragment" />
@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/favouritesDetailsFragment"
         android:name="com.example.chucknorris.view.jokes.JokeDetailsFragment"
-        android:label="Details" >
+        android:label="Details">
         <argument
             android:name="joke"
             app:argType="com.example.chucknorris.model.models.Joke" />

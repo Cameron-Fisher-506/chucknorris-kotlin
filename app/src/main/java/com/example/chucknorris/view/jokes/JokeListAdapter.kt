@@ -10,13 +10,14 @@ import com.example.chucknorris.databinding.JokeItemBinding
 import com.example.chucknorris.model.models.Joke
 import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 
-class JokeListAdapter(private val jokeList: ArrayList<Joke>): RecyclerView.Adapter<JokeListAdapter.JokeViewHolder>() {
+class JokeListAdapter(private val jokeList: ArrayList<Joke>) :
+    RecyclerView.Adapter<JokeListAdapter.JokeViewHolder>() {
 
-    class JokeViewHolder(val binding: JokeItemBinding): RecyclerView.ViewHolder(binding.root)
+    class JokeViewHolder(val binding: JokeItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = JokeItemBinding.inflate(inflater, parent,false)
+        val binding = JokeItemBinding.inflate(inflater, parent, false)
         return JokeViewHolder(binding)
 
     }
@@ -30,15 +31,15 @@ class JokeListAdapter(private val jokeList: ArrayList<Joke>): RecyclerView.Adapt
         holder.binding.jokeTextView.text = jokeList[position].value
 
         holder.binding.layoutContainer.setOnClickListener(View.OnClickListener {
-            val action = JokeListFragmentDirections.actionJokeListFragmentToJokeDetailsFragment(jokeList[position])
+            val action =
+                JokeListFragmentDirections.actionJokeListFragmentToJokeDetailsFragment(jokeList[position])
             Navigation.findNavController(it).navigate(action)
         })
     }
 
     override fun getItemCount() = jokeList.size
 
-    fun updateJokesList(chuckNorrisWithJokes: ChuckNorrisWithJokes)
-    {
+    fun updateJokesList(chuckNorrisWithJokes: ChuckNorrisWithJokes) {
         this.jokeList.clear()
         this.jokeList.addAll(chuckNorrisWithJokes.jokes)
         notifyDataSetChanged()

@@ -36,8 +36,7 @@ class FavouritesListAdapter(private val favourites: ArrayList<FavouriteJoke>) :
                 url = favourites[position].url
                 value = favourites[position].value
             }
-            val action =
-                FavouritesFragmentDirections.actionFavouritesFragmentToFavouritesDetailsFragment(joke)
+            val action = FavouritesFragmentDirections.actionFavouritesFragmentToFavouritesDetailsFragment(joke)
             Navigation.findNavController(it).navigate(action)
         }
     }

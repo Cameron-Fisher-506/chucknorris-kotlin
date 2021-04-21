@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/search_navigation_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_navigation_graph"
     app:startDestination="@id/searchListFragment">
 
     <fragment
         android:id="@+id/searchListFragment"
         android:name="com.example.chucknorris.view.search.SearchListFragment"
-        android:label="Search" >
+        android:label="Search">
         <action
             android:id="@+id/action_searchListFragment_to_jokeDetailsFragment2"
             app:destination="@id/jokeDetailsFragment2" />
@@ -14,7 +15,7 @@
     <fragment
         android:id="@+id/jokeDetailsFragment2"
         android:name="com.example.chucknorris.view.jokes.JokeDetailsFragment"
-        android:label="Details" >
+        android:label="Details">
         <action
             android:id="@+id/action_jokeDetailsFragment2_to_searchListFragment"
             app:destination="@id/searchListFragment" />

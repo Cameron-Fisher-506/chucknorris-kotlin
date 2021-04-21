@@ -12,7 +12,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     private val repository = JokeRepository(application)
 
-    fun getJokesBySearch(query: String){
+    fun getJokesBySearch(query: String) {
         chuckNorrisWithJokesBySearch = repository.getJokeBySearch(query)
     }
 }

@@ -12,8 +12,7 @@ import com.example.chucknorris.enum.Status
 import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 import com.example.chucknorris.utils.Resource
 
-class JokeListFragment: Fragment(R.layout.joke_list_fragment)
-{
+class JokeListFragment : Fragment(R.layout.joke_list_fragment) {
     private lateinit var binding: JokeListFragmentBinding
     private lateinit var jokeViewModel: JokeViewModel
     private lateinit var jokeListAdapter: JokeListAdapter
@@ -29,10 +28,9 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
         wireUI()
     }
 
-    private fun attachObservers()
-    {
+    private fun attachObservers() {
         val jokesBySearchObserver = Observer<Resource<ChuckNorrisWithJokes>> {
-            when (it.status){
+            when (it.status) {
                 Status.SUCCESS -> {
                     displayJokesRecyclerView()
                     it.data?.let { data -> this.jokeListAdapter.updateJokesList(data) }
@@ -44,8 +42,7 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
         this.jokeViewModel.chuckNorrisWithJokesBySearch.observe(this, jokesBySearchObserver)
     }
 
-    private fun displayErrorMessage()
-    {
+    private fun displayErrorMessage() {
         with(this.binding)
         {
             jokesRecyclerView.visibility = View.GONE
@@ -54,8 +51,7 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
         }
     }
 
-    private fun displayJokesRecyclerView()
-    {
+    private fun displayJokesRecyclerView() {
         with(this.binding)
         {
             jokesRecyclerView.visibility = View.VISIBLE
@@ -64,8 +60,7 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
         }
     }
 
-    private fun displayProgressBar()
-    {
+    private fun displayProgressBar() {
         with(this.binding)
         {
             jokesRecyclerView.visibility = View.GONE
@@ -74,11 +69,9 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
         }
     }
 
-    private fun wireUI()
-    {
+    private fun wireUI() {
         this.jokeListAdapter = JokeListAdapter(arrayListOf())
-        with(this.binding)
-        {
+        with(this.binding) {
             jokesRecyclerView.layoutManager = GridLayoutManager(context, 1)
             jokesRecyclerView.adapter = jokeListAdapter
 
@@ -88,6 +81,5 @@ class JokeListFragment: Fragment(R.layout.joke_list_fragment)
                 refreshLayout.isRefreshing = false
             }
         }
-
     }
 }

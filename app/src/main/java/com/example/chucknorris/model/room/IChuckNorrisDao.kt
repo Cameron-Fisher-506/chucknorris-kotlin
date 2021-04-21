@@ -8,7 +8,7 @@ import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 import com.example.chucknorris.model.models.Joke
 
 @Dao
-interface IChuckNorrisDao: IBaseDao<ChuckNorris> {
+interface IChuckNorrisDao : IBaseDao<ChuckNorris> {
     @Query("SELECT * FROM chucknorris")
     suspend fun getAllChuckNorrisWithJokes(): List<ChuckNorrisWithJokes>?
 }

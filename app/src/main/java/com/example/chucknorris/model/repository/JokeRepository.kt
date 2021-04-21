@@ -9,7 +9,6 @@ import com.example.chucknorris.utils.WSCallsUtils
 
 class JokeRepository(application: Application) {
     private val chuckNorrisService = ChuckNorrisService()
-    private val chuckNorrisDao = ChuckNorrisDatabase.getDatabase(application).chuckNorrisDao()
     private val jokeDao = ChuckNorrisDatabase.getDatabase(application).jokeDao()
 
     fun getJokeBySearch(query: String) = WSCallsUtils.getByQuery(jokeDao){ chuckNorrisService.getJokesBySearch(query) }

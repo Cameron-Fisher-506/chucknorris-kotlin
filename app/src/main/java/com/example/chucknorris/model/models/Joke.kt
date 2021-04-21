@@ -17,8 +17,7 @@ data class Joke(
     var value: String = "",
     var chuckNorrisId: Int = 1
 
-): BaseModel(), Serializable
-{
+) : BaseModel(), Serializable {
     @PrimaryKey(autoGenerate = true)
     @SerializedName("")
     override var id: Int = 0

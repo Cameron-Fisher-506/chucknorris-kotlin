@@ -9,4 +9,4 @@ data class ChuckNorris(
     @PrimaryKey(autoGenerate = false)
     override var id: Int = 1,
     val name: String = ""
-): BaseModel(), Serializable
+) : BaseModel(), Serializable

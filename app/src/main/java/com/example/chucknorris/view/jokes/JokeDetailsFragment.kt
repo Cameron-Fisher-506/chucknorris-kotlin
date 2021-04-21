@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class JokeDetailsFragment: Fragment(R.layout.joke_details_fragment) {
+class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
 
     private lateinit var binding: JokeDetailsFragmentBinding
     private lateinit var favouritesViewModel: FavouritesViewModel
@@ -29,8 +29,7 @@ class JokeDetailsFragment: Fragment(R.layout.joke_details_fragment) {
         arguments?.let { wireUI(it) }
     }
 
-    private fun wireUI(bundle: Bundle)
-    {
+    private fun wireUI(bundle: Bundle) {
         val joke = JokeDetailsFragmentArgs.fromBundle(bundle).joke
         isJokeCached(joke.value)
         with(this.binding)
@@ -51,17 +50,16 @@ class JokeDetailsFragment: Fragment(R.layout.joke_details_fragment) {
                 }
 
                 favouritesViewModel.insert(favouriteJoke)
-                context?.let{GeneralUtils.makeToast(it, "Added to favourites")}
+                context?.let { GeneralUtils.makeToast(it, "Added to favourites") }
                 isJokeCached(favouriteJoke.value)
             })
         }
     }
 
-    private fun isJokeCached(value: String)
-    {
-        CoroutineScope(Dispatchers.IO).launch{
+    private fun isJokeCached(value: String) {
+        CoroutineScope(Dispatchers.IO).launch {
             val cachedJoke = favouritesViewModel.findByValue(value)
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 cachedJoke?.let { binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24) }
             }
         }
