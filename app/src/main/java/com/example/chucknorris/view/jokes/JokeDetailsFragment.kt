@@ -3,12 +3,15 @@ package com.example.chucknorris.view.jokes
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.JokeDetailsFragmentBinding
+import com.example.chucknorris.enum.Status
 import com.example.chucknorris.model.models.FavouriteJoke
 import com.example.chucknorris.utils.GeneralUtils
+import com.example.chucknorris.utils.Resource
 import com.example.chucknorris.view.menu.favourites.FavouritesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +30,21 @@ class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
         this.favouritesViewModel = ViewModelProviders.of(this).get(FavouritesViewModel::class.java)
 
         arguments?.let { wireUI(it) }
+        attachObservers()
+    }
+
+    private fun attachObservers() {
+        val findByValueObserver = Observer<Resource<FavouriteJoke>> {
+            if (it.status == Status.SUCCESS) {
+                 binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            }
+        }
+        this.favouritesViewModel.findByValueLiveData.observe(this, findByValueObserver)
     }
 
     private fun wireUI(bundle: Bundle) {
         val joke = JokeDetailsFragmentArgs.fromBundle(bundle).joke
-        isJokeCached(joke.value)
+        favouritesViewModel.findByValue(joke.value)
         with(this.binding)
         {
             Glide.with(this.root)
@@ -51,17 +64,8 @@ class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
 
                 favouritesViewModel.insert(favouriteJoke)
                 context?.let { GeneralUtils.makeToast(it, "Added to favourites") }
-                isJokeCached(favouriteJoke.value)
+                favouritesViewModel.findByValue(favouriteJoke.value)
             })
-        }
-    }
-
-    private fun isJokeCached(value: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val cachedJoke = favouritesViewModel.findByValue(value)
-            withContext(Dispatchers.Main) {
-                cachedJoke?.let { binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24) }
-            }
         }
     }
 }
