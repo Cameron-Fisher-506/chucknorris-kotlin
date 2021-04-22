@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.chucknorris.R
 import com.example.chucknorris.databinding.JokeListFragmentBinding
 import com.example.chucknorris.enum.Status
-import com.example.chucknorris.model.models.ChuckNorrisWithJokes
+import com.example.chucknorris.model.models.Joke
 import com.example.chucknorris.utils.Resource
 
 class JokeListFragment : Fragment(R.layout.joke_list_fragment) {
@@ -29,7 +29,7 @@ class JokeListFragment : Fragment(R.layout.joke_list_fragment) {
     }
 
     private fun attachObservers() {
-        val jokesBySearchObserver = Observer<Resource<ChuckNorrisWithJokes>> {
+        val jokesBySearchObserver = Observer<Resource<List<Joke>>> {
             when (it.status) {
                 Status.SUCCESS -> {
                     displayJokesRecyclerView()
@@ -39,7 +39,7 @@ class JokeListFragment : Fragment(R.layout.joke_list_fragment) {
                 Status.LOADING -> displayProgressBar()
             }
         }
-        this.jokeViewModel.chuckNorrisWithJokesBySearch.observe(this, jokesBySearchObserver)
+        this.jokeViewModel.jokesBySearchLiveData.observe(this, jokesBySearchObserver)
     }
 
     private fun displayErrorMessage() {

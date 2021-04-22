@@ -39,9 +39,9 @@ class JokeListAdapter(private val jokeList: ArrayList<Joke>) :
 
     override fun getItemCount() = jokeList.size
 
-    fun updateJokesList(chuckNorrisWithJokes: ChuckNorrisWithJokes) {
+    fun updateJokesList(jokes: List<Joke>) {
         this.jokeList.clear()
-        this.jokeList.addAll(chuckNorrisWithJokes.jokes)
+        this.jokeList.addAll(jokes)
         notifyDataSetChanged()
     }
 }

@@ -1,10 +1,11 @@
 package com.example.chucknorris.model.models
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity
+@Entity(indices = [Index(value = ["value"], unique = true)])
 data class FavouriteJoke(
     var createdAt: String = "",
     var iconUrl: String = "",

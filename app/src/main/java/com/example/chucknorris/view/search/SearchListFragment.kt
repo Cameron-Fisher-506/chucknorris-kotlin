@@ -12,6 +12,7 @@ import com.example.chucknorris.R
 import com.example.chucknorris.databinding.SearchListFragmentBinding
 import com.example.chucknorris.enum.Status
 import com.example.chucknorris.model.models.ChuckNorrisWithJokes
+import com.example.chucknorris.model.models.Joke
 import com.example.chucknorris.utils.GeneralUtils
 import com.example.chucknorris.utils.Resource
 import kotlinx.android.synthetic.main.search_list_fragment.*
@@ -33,7 +34,7 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
     }
 
     private fun attachObservers() {
-        val jokesBySearchObserver = Observer<Resource<ChuckNorrisWithJokes>> {
+        val jokesBySearchObserver = Observer<Resource<List<Joke>>> {
             when (it.status) {
                 Status.SUCCESS -> {
                     hideLoading()
@@ -44,7 +45,7 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
             }
 
         }
-        this.searchViewModel.chuckNorrisWithJokesBySearch.observe(this, jokesBySearchObserver)
+        this.searchViewModel.jokesBySearchLiveData.observe(this, jokesBySearchObserver)
     }
 
     private fun wireUI() {

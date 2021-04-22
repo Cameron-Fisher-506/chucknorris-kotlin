@@ -1,11 +1,12 @@
 package com.example.chucknorris.model.models
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-@Entity
+@Entity(indices = [Index(value = ["value"],unique = true)])
 data class Joke(
     @SerializedName("created_at")
     var createdAt: String = "",
