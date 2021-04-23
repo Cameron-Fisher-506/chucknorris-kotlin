@@ -16,7 +16,8 @@ data class Joke(
     var updatedAt: String = "",
     var url: String = "",
     var value: String = "",
-    var chuckNorrisId: Int = 1
+    var chuckNorrisId: Int = 1,
+    var timestamp: String = ""
 
 ) : BaseModel(), Serializable {
     @PrimaryKey(autoGenerate = true)

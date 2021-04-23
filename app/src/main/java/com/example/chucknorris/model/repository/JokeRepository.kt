@@ -9,5 +9,5 @@ class JokeRepository(application: Application) {
     private val chuckNorrisService = ChuckNorrisService()
     private val jokeDao = ChuckNorrisDatabase.getDatabase(application).jokeDao()
 
-    fun getJokesBySearch(query: String) = DataAccessStrategyUtils.getJokesByQuery(jokeDao, query){ chuckNorrisService.getJokesBySearch(query) }
+    fun getJokesBySearch(query: String) = DataAccessStrategyUtils.synchronizedCache(jokeDao, query){ chuckNorrisService.getJokesBySearch(query) }
 }
