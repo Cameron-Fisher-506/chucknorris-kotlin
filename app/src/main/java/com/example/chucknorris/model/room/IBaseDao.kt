@@ -14,10 +14,10 @@ interface IBaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(entities: List<T>)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(entity: T)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(entities: List<T>)
 
     @Delete

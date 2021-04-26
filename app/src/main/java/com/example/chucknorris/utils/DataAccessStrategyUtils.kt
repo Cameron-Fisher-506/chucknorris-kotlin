@@ -23,8 +23,6 @@ object DataAccessStrategyUtils {
                 if (response.status == Status.SUCCESS && response.data != null) {
                     if (response.data is ChuckNorrisWithJokes) {
                         emit(Resource.success(response.data.jokes))
-
-                        response.data.jokes.map { it.timestamp = DateTimeUtils.getCurrentDateTime(DateTimeUtils.DASHED_PATTERN_YYYY_MM_DD_HH_MM_SS) }
                         jokeDao.insert(response.data.jokes)
                     } else {
                         //jokeDao.insert(response.data as List<Joke>)
@@ -42,10 +40,10 @@ object DataAccessStrategyUtils {
             val result = jokeDao.getAllByValue(query)
             if (result != null && result.isNotEmpty()) {
                 var mustUpdate = false
-                result.forEach {
-                    if (DateTimeUtils.differenceInMinutes(it.timestamp, DateTimeUtils.getCurrentDateTime(DateTimeUtils.DASHED_PATTERN_YYYY_MM_DD_HH_MM_SS)) > DateTimeUtils.ONE_MINUTE) {
+                for (i in result.indices) {
+                    if(DateTimeUtils.differenceInMinutes(result[i].timestamp, DateTimeUtils.getCurrentDateTime(DateTimeUtils.DASHED_PATTERN_YYYY_MM_DD_HH_MM_SS)) > DateTimeUtils.ONE_MINUTE) {
                         mustUpdate = true
-                        return@forEach
+                        break
                     }
                 }
 
@@ -53,13 +51,11 @@ object DataAccessStrategyUtils {
                     val response = wsCall.invoke()
                     if (response.status == Status.SUCCESS && response.data != null) {
                         if (response.data is ChuckNorrisWithJokes) {
-                            response.data.jokes.map { it.timestamp = DateTimeUtils.getCurrentDateTime(DateTimeUtils.DASHED_PATTERN_YYYY_MM_DD_HH_MM_SS) }
-                            jokeDao.update(response.data.jokes)
-
                             emit(Resource.success(response.data.jokes))
+                            jokeDao.update(response.data.jokes)
                         }
                     } else {
-                        emit(Resource.success(result))
+                        emit(Resource.error("No data found."))
                     }
                 } else {
                     emit(Resource.success(result))
@@ -69,10 +65,8 @@ object DataAccessStrategyUtils {
                 val response = wsCall.invoke()
                 if (response.status == Status.SUCCESS && response.data != null) {
                     if (response.data is ChuckNorrisWithJokes) {
-                        response.data.jokes.map { it.timestamp = DateTimeUtils.getCurrentDateTime(DateTimeUtils.DASHED_PATTERN_YYYY_MM_DD_HH_MM_SS) }
-                        jokeDao.insert(response.data.jokes)
-
                         emit(Resource.success(response.data.jokes))
+                        jokeDao.insert(response.data.jokes)
                     }
                 } else {
                     emit(Resource.error("No data found."))

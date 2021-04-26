@@ -60,6 +60,7 @@ class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
                     updatedAt = joke.updatedAt
                     url = joke.url
                     value = joke.value
+                    id = joke.id
                 }
 
                 favouritesViewModel.insert(favouriteJoke)

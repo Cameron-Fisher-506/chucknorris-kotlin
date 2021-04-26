@@ -33,5 +33,5 @@ object DateTimeUtils {
         return toReturn
     }
 
-    fun differenceInMinutes(oldDateTime: String, currentDateTime: String) = (TimeUnit.MILLISECONDS.toMinutes(differenceInTime(oldDateTime, currentDateTime)) % 60)
+    fun differenceInMinutes(oldDateTime: String, currentDateTime: String) = TimeUnit.MILLISECONDS.toMinutes(differenceInTime(oldDateTime, currentDateTime))
 }
