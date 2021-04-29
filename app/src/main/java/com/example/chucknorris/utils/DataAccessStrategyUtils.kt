@@ -1,10 +1,7 @@
 package com.example.chucknorris.utils
 
-import android.util.Log
 import androidx.lifecycle.liveData
-import androidx.sqlite.db.SimpleSQLiteQuery
 import com.example.chucknorris.enum.Status
-import com.example.chucknorris.model.models.ChuckNorris
 import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 import com.example.chucknorris.model.models.Joke
 import com.example.chucknorris.model.room.*
@@ -47,7 +44,11 @@ object DataAccessStrategyUtils {
             if (result != null && result.isNotEmpty()) {
                 var mustUpdate = false
                 for (i in result.indices) {
-                    if(DateTimeUtils.differenceInMinutes(result[i].timestamp, DateTimeUtils.getCurrentDateTime(DateTimeUtils.DASHED_PATTERN_YYYY_MM_DD_HH_MM_SS)) > DateTimeUtils.ONE_MINUTE) {
+                    if(DateTimeUtils.differenceInMinutes(
+                            result[i].timestamp, DateTimeUtils.getCurrentDateTime(
+                                DateTimeUtils.DASHED_PATTERN_YYYY_MM_DD_HH_MM_SS
+                            )
+                        ) > DateTimeUtils.ONE_MINUTE) {
                         mustUpdate = true
                         break
                     }
@@ -57,8 +58,8 @@ object DataAccessStrategyUtils {
                     val response = wsCall.invoke()
                     if (response.status == Status.SUCCESS && response.data != null) {
                         if (response.data is ChuckNorrisWithJokes) {
+                            upsert(response.data.jokes, jokeDao)
                             emit(Resource.success(response.data.jokes))
-                            jokeDao.update(response.data.jokes)
                         }
                     } else {
                         emit(Resource.error("No data found."))
@@ -66,17 +67,31 @@ object DataAccessStrategyUtils {
                 } else {
                     emit(Resource.success(result))
                 }
-
             } else {
                 val response = wsCall.invoke()
                 if (response.status == Status.SUCCESS && response.data != null) {
                     if (response.data is ChuckNorrisWithJokes) {
+                        upsert(response.data.jokes, jokeDao)
                         emit(Resource.success(response.data.jokes))
-                        jokeDao.insert(response.data.jokes)
                     }
                 } else {
                     emit(Resource.error("No data found."))
                 }
             }
         }
+
+    suspend fun upsert(entities: List<Joke>, jokeDao: IJokeDao) {
+        val insertResult: List<Long> = jokeDao.insert(entities)
+        val updateList: MutableList<Joke> = ArrayList()
+
+        for (i in insertResult.indices) {
+            if (insertResult[i] == -1L) {
+                updateList.add(entities[i])
+            }
+        }
+
+        if (updateList.isNotEmpty()) {
+            jokeDao.update(updateList)
+        }
+    }
 }

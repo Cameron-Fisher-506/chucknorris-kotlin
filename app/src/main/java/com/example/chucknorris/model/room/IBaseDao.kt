@@ -9,10 +9,10 @@ import com.example.chucknorris.model.models.Joke
 interface IBaseDao<T> {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(entity: T)
+    suspend fun insert(entity: T): Long
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(entities: List<T>)
+    suspend fun insert(entities: List<T>): List<Long>
 
     @Update
     suspend fun update(entity: T)
