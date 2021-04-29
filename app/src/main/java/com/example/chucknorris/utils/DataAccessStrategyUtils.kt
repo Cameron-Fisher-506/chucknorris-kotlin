@@ -58,7 +58,7 @@ object DataAccessStrategyUtils {
                     val response = wsCall.invoke()
                     if (response.status == Status.SUCCESS && response.data != null) {
                         if (response.data is ChuckNorrisWithJokes) {
-                            upsert(response.data.jokes, jokeDao)
+                            jokeDao.upsert(response.data.jokes, jokeDao)
                             emit(Resource.success(response.data.jokes))
                         }
                     } else {
@@ -71,7 +71,7 @@ object DataAccessStrategyUtils {
                 val response = wsCall.invoke()
                 if (response.status == Status.SUCCESS && response.data != null) {
                     if (response.data is ChuckNorrisWithJokes) {
-                        upsert(response.data.jokes, jokeDao)
+                        jokeDao.upsert(response.data.jokes, jokeDao)
                         emit(Resource.success(response.data.jokes))
                     }
                 } else {
@@ -79,19 +79,4 @@ object DataAccessStrategyUtils {
                 }
             }
         }
-
-    suspend fun upsert(entities: List<Joke>, jokeDao: IJokeDao) {
-        val insertResult: List<Long> = jokeDao.insert(entities)
-        val updateList: MutableList<Joke> = ArrayList()
-
-        for (i in insertResult.indices) {
-            if (insertResult[i] == -1L) {
-                updateList.add(entities[i])
-            }
-        }
-
-        if (updateList.isNotEmpty()) {
-            jokeDao.update(updateList)
-        }
-    }
 }
