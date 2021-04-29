@@ -15,4 +15,7 @@ interface IChuckNorrisApi {
 
     @GET("search")
     suspend fun getJokesBySearch(@Query("query") query: String): Response<ChuckNorrisWithJokes>
+
+    @GET("random")
+    suspend fun getRandomJoke(): Response<Joke>
 }

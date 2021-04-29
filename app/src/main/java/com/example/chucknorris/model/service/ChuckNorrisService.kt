@@ -24,4 +24,6 @@ class ChuckNorrisService : BaseService() {
         getResponse { this.api.getRandomJokeByCategory(category) }
 
     suspend fun getJokesBySearch(query: String) = getResponse { this.api.getJokesBySearch(query) }
+
+    suspend fun getRandomJoke() = getResponse { this.api.getRandomJoke() }
 }

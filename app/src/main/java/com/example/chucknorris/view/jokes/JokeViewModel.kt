@@ -8,15 +8,14 @@ import com.example.chucknorris.model.repository.ChuckNorrisRepository
 import com.example.chucknorris.utils.Resource
 
 class JokeViewModel(application: Application) : AndroidViewModel(application) {
-    lateinit var jokesBySearchLiveData: LiveData<Resource<List<Joke>>>
-
+    lateinit var randomJokesLiveData: LiveData<Resource<List<Joke>>>
     private var jokeRepository = JokeRepository(application)
 
     init {
         ChuckNorrisRepository(application)
     }
 
-    fun getJokesBySearch(query: String) {
-        jokesBySearchLiveData = jokeRepository.getJokesBySearch(query)
+    fun getRandomJokes(update: Boolean) {
+        this.randomJokesLiveData = this.jokeRepository.getRandomJokes(update)
     }
 }

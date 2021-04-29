@@ -35,7 +35,7 @@ abstract class ChuckNorrisDatabase : RoomDatabase() {
             }
         }
 
-        inline fun <T> findByValue(crossinline daoCall: suspend () -> T?) =
+        inline fun <T> getResponse(crossinline daoCall: suspend () -> T?) =
             liveData<Resource<T>>(Dispatchers.IO) {
                 emit(Resource.loading())
 

@@ -17,7 +17,7 @@ class FavouriteJokeRepository(application: Application) {
         }
     }
 
-    fun findByValue(value: String) = ChuckNorrisDatabase.findByValue { this.favouriteJokeDao.findByValue(value) }
+    fun findByValue(value: String) = ChuckNorrisDatabase.getResponse { this.favouriteJokeDao.findByValue(value) }
 
     fun readAll(): LiveData<List<FavouriteJoke>> {
         return favouriteJokeDao.readAll()

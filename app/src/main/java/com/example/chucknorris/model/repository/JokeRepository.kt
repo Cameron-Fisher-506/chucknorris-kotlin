@@ -15,9 +15,15 @@ class JokeRepository(application: Application) {
     private val jokeDao = ChuckNorrisDatabase.getDatabase(application).jokeDao()
 
     private val queryLiveData by lazy { MutableLiveData<String>()}
+    private val updateRandomLiveData by lazy { MutableLiveData<Boolean>() }
 
     fun getJokesBySearch(query: String): LiveData<Resource<List<Joke>>> {
         queryLiveData.value = query
         return Transformations.switchMap(queryLiveData) {DataAccessStrategyUtils.synchronizedCache(jokeDao, it){ chuckNorrisService.getJokesBySearch(it) }}
+    }
+
+    fun getRandomJokes(update: Boolean): LiveData<Resource<List<Joke>>> {
+        updateRandomLiveData.value = update
+        return Transformations.switchMap(updateRandomLiveData) { DataAccessStrategyUtils.synchronizedCache(jokeDao, null){ chuckNorrisService.getJokesBySearch("Chuck Norris") } }
     }
 }

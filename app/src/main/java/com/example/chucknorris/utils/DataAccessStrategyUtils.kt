@@ -33,11 +33,17 @@ object DataAccessStrategyUtils {
             }
         }
 
-    inline fun <T> synchronizedCache(jokeDao: IJokeDao, query: String, crossinline wsCall: suspend () -> Resource<T>) =
+    inline fun <T> synchronizedCache(jokeDao: IJokeDao, query: String?, crossinline wsCall: suspend () -> Resource<T>) =
         liveData<Resource<List<Joke>>>(Dispatchers.IO) {
             emit(Resource.loading())
 
-            val result = jokeDao.getAllByValue(query)
+            var result: List<Joke>? = null
+            result = if(query == null) {
+                jokeDao.getRandomJokes()
+            } else {
+                jokeDao.getAllByValue(query)
+            }
+
             if (result != null && result.isNotEmpty()) {
                 var mustUpdate = false
                 for (i in result.indices) {

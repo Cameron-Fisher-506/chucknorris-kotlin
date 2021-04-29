@@ -23,13 +23,13 @@ class JokeListFragment : Fragment(R.layout.joke_list_fragment) {
 
         this.jokeViewModel = ViewModelProviders.of(this).get(JokeViewModel::class.java)
 
-        this.jokeViewModel.getJokesBySearch("Animal")
+        this.jokeViewModel.getRandomJokes(true)
         attachObservers()
         wireUI()
     }
 
     private fun attachObservers() {
-        val jokesBySearchObserver = Observer<Resource<List<Joke>>> {
+        val randomJokesObserver = Observer<Resource<List<Joke>>> {
             when (it.status) {
                 Status.SUCCESS -> {
                     displayJokesRecyclerView()
@@ -39,7 +39,7 @@ class JokeListFragment : Fragment(R.layout.joke_list_fragment) {
                 Status.LOADING -> displayProgressBar()
             }
         }
-        this.jokeViewModel.jokesBySearchLiveData.observe(this, jokesBySearchObserver)
+        this.jokeViewModel.randomJokesLiveData.observe(this, randomJokesObserver)
     }
 
     private fun displayErrorMessage() {
@@ -77,7 +77,7 @@ class JokeListFragment : Fragment(R.layout.joke_list_fragment) {
 
             refreshLayout.setOnRefreshListener {
                 displayProgressBar()
-                jokeViewModel.getJokesBySearch("Dogs")
+                jokeViewModel.getRandomJokes(true)
                 refreshLayout.isRefreshing = false
             }
         }
