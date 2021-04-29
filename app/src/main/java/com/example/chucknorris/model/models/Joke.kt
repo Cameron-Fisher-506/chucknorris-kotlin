@@ -8,7 +8,7 @@ import com.example.chucknorris.utils.GeneralUtils
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-@Entity(indices = [Index(value = ["value"],unique = true)])
+@Entity(indices = [Index(value = ["id"],unique = true)])
 data class Joke(
     @PrimaryKey
     var id: String = "",

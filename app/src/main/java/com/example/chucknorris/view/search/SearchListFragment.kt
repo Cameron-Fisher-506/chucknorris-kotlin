@@ -43,7 +43,6 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
                 Status.ERROR -> showLoadingError()
                 Status.LOADING -> showLoading()
             }
-
         }
         this.searchViewModel.jokesBySearchLiveData.observe(this, jokesBySearchObserver)
     }

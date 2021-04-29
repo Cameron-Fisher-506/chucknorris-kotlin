@@ -3,6 +3,7 @@ package com.example.chucknorris.view.menu.favourites;
 import android.os.Bundle;
 import android.os.Parcelable;
 import androidx.annotation.NonNull;
+import androidx.navigation.ActionOnlyNavDirections;
 import androidx.navigation.NavDirections;
 import com.example.chucknorris.R;
 import com.example.chucknorris.model.models.Joke;
@@ -22,6 +23,11 @@ public class FavouritesFragmentDirections {
   public static ActionFavouritesFragmentToFavouritesDetailsFragment actionFavouritesFragmentToFavouritesDetailsFragment(
       @NonNull Joke joke) {
     return new ActionFavouritesFragmentToFavouritesDetailsFragment(joke);
+  }
+
+  @NonNull
+  public static NavDirections actionFavouritesFragmentToMenuListFragment() {
+    return new ActionOnlyNavDirections(R.id.action_favouritesFragment_to_menuListFragment);
   }
 
   public static class ActionFavouritesFragmentToFavouritesDetailsFragment implements NavDirections {

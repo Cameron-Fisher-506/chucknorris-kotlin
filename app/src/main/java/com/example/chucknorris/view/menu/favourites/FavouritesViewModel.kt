@@ -16,6 +16,10 @@ class FavouritesViewModel(application: Application) : AndroidViewModel(applicati
         favouriteJokeRepository.insert(favouriteJoke)
     }
 
+    fun delete(favouriteJoke: FavouriteJoke) {
+        favouriteJokeRepository.delete(favouriteJoke)
+    }
+
     fun findByValue(value: String) {
         findByValueLiveData = this.favouriteJokeRepository.findByValue(value)
     }

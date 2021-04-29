@@ -22,6 +22,7 @@ class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
 
     private lateinit var binding: JokeDetailsFragmentBinding
     private lateinit var favouritesViewModel: FavouritesViewModel
+    private var isAddedToFavourites: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,8 +36,17 @@ class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
 
     private fun attachObservers() {
         val findByValueObserver = Observer<Resource<FavouriteJoke>> {
-            if (it.status == Status.SUCCESS) {
-                 binding.btnFavourite.setImageResource(R.drawable.ic_baseline_favorite_24)
+            displayFavouriteJoke()
+            when (it.status) {
+                Status.SUCCESS -> {
+                    isAddedToFavourites = true
+                    binding.favouriteImageButton.setImageResource(R.drawable.ic_baseline_favorite_24)
+                }
+                Status.LOADING -> displayProgressBar()
+                else -> {
+                    isAddedToFavourites = false
+                    binding.favouriteImageButton.setImageResource(R.drawable.ic_baseline_favorite_border_24)
+                }
             }
         }
         this.favouritesViewModel.findByValueLiveData.observe(this, findByValueObserver)
@@ -50,10 +60,10 @@ class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
             Glide.with(this.root)
                 .asBitmap()
                 .load(joke.iconUrl)
-                .into(imgChuckNorris)
+                .into(chuckNorrisImageView)
 
-            txtJoke.text = joke.value
-            btnFavourite.setOnClickListener(View.OnClickListener {
+            jokeTextView.text = joke.value
+            favouriteImageButton.setOnClickListener {
                 val favouriteJoke = FavouriteJoke().apply {
                     createdAt = joke.createdAt
                     iconUrl = joke.iconUrl
@@ -63,10 +73,33 @@ class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
                     id = joke.id
                 }
 
-                favouritesViewModel.insert(favouriteJoke)
-                context?.let { GeneralUtils.makeToast(it, "Added to favourites") }
-                favouritesViewModel.findByValue(favouriteJoke.value)
-            })
+                if (isAddedToFavourites) {
+                    favouritesViewModel.delete(favouriteJoke)
+                    favouritesViewModel.findByValue(favouriteJoke.value)
+                } else {
+                    favouritesViewModel.insert(favouriteJoke)
+                    favouritesViewModel.findByValue(favouriteJoke.value)
+                }
+            }
+        }
+    }
+
+    private fun displayProgressBar() {
+        with(this.binding)
+        {
+            chuckNorrisImageView.visibility = View.GONE
+            favouriteImageButton.visibility = View.GONE
+            jokeTextView.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+        }
+    }
+
+    private fun displayFavouriteJoke() {
+        with(this.binding) {
+            chuckNorrisImageView.visibility = View.VISIBLE
+            favouriteImageButton.visibility = View.VISIBLE
+            jokeTextView.visibility = View.VISIBLE
+            progressBar.visibility = View.GONE
         }
     }
 }

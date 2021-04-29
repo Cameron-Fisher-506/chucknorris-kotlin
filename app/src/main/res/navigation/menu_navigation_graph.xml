@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_favouritesFragment_to_favouritesDetailsFragment"
             app:destination="@id/favouritesDetailsFragment" />
+        <action
+            android:id="@+id/action_favouritesFragment_to_menuListFragment"
+            app:destination="@id/menuListFragment" />
     </fragment>
     <fragment
         android:id="@+id/favouritesDetailsFragment"
@@ -29,5 +32,8 @@
         <argument
             android:name="joke"
             app:argType="com.example.chucknorris.model.models.Joke" />
+        <action
+            android:id="@+id/action_favouritesDetailsFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
     </fragment>
 </navigation>
