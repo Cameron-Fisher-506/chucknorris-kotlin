@@ -28,7 +28,7 @@ class SearchListFragment : Fragment(R.layout.search_list_fragment) {
 
         this.searchViewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
 
-        this.searchViewModel.getJokesBySearch("Animal")
+        this.searchViewModel.getJokesBySearch("Chuck Norris")
         attachObservers()
         wireUI()
     }
