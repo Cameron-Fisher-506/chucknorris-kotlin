@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun attachNavController() {
-        this.navController = Navigation.findNavController(this, R.id.fragmentContainer)
+        this.navController = Navigation.findNavController(this, R.id.navHostFragment)
         NavigationUI.setupActionBarWithNavController(this, this.navController)
     }
 
