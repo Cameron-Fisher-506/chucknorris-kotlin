@@ -1,4 +1,4 @@
-package com.example.chucknorris.view.jokes
+package com.example.chucknorris.view.home
 
 import android.os.Bundle
 import android.view.View
@@ -10,13 +10,8 @@ import com.example.chucknorris.R
 import com.example.chucknorris.databinding.JokeDetailsFragmentBinding
 import com.example.chucknorris.enum.Status
 import com.example.chucknorris.model.models.FavouriteJoke
-import com.example.chucknorris.utils.GeneralUtils
 import com.example.chucknorris.utils.Resource
 import com.example.chucknorris.view.menu.favourites.FavouritesViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class JokeDetailsFragment : Fragment(R.layout.joke_details_fragment) {
 

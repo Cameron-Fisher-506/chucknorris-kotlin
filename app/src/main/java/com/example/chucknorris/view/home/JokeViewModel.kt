@@ -1,4 +1,4 @@
-package com.example.chucknorris.view.jokes
+package com.example.chucknorris.view.home
 
 import android.app.Application
 import androidx.lifecycle.*

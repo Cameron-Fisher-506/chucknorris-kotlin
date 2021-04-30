@@ -1,4 +1,4 @@
-package com.example.chucknorris.view.jokes
+package com.example.chucknorris.view.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.chucknorris.databinding.JokeItemBinding
 import com.example.chucknorris.model.models.Joke
-import com.example.chucknorris.model.models.ChuckNorrisWithJokes
 
 class JokeListAdapter(private val jokeList: ArrayList<Joke>) :
     RecyclerView.Adapter<JokeListAdapter.JokeViewHolder>() {

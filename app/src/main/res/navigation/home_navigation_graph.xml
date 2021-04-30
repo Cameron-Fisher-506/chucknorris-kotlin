@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/jokeListFragment"
-        android:name="com.example.chucknorris.view.jokes.JokeListFragment"
+        android:name="com.example.chucknorris.view.home.JokeListFragment"
         android:label="Jokes">
         <action
             android:id="@+id/action_jokeListFragment_to_jokeDetailsFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/jokeDetailsFragment"
-        android:name="com.example.chucknorris.view.jokes.JokeDetailsFragment"
+        android:name="com.example.chucknorris.view.home.JokeDetailsFragment"
         android:label="Details">
         <action
             android:id="@+id/action_jokeDetailsFragment_to_jokeListFragment"
