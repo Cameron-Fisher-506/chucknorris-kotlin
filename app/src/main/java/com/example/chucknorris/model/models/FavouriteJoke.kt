@@ -5,7 +5,7 @@ import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(indices = [Index(value = ["value"], unique = true)])
+@Entity(indices = [Index(value = ["id"], unique = true)])
 data class FavouriteJoke(
     @PrimaryKey
     var id: String = "",

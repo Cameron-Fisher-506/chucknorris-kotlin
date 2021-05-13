@@ -1,7 +1,5 @@
 package com.example.chucknorris.model.room
 
-import com.example.chucknorris.model.models.Joke
-
 suspend fun <T> IBaseDao<T>.upsert(entities: List<T>, baseDao: IBaseDao<T>) {
     val insertResult: List<Long> = baseDao.insert(entities)
     val updateList: MutableList<T> = ArrayList()
